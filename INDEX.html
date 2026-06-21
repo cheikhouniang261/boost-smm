@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boost — Croissance réseaux sociaux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1115;
+    --bg-soft:#15181E;
+    --card:#1A1E26;
+    --line:#262B35;
+    --text:#F4F4F5;
+    --muted:#9499A6;
+    --muted-2:#6B7180;
+    --violet:#8B5CF6;
+    --pink:#EC4899;
+    --grad: linear-gradient(135deg, var(--violet), var(--pink));
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.02em;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,17,21,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:72px;}
+  .logo{font-family:'Space Grotesk'; font-weight:700; font-size:1.25rem; display:flex; align-items:center; gap:8px;}
+  .logo-dot{width:10px; height:10px; border-radius:50%; background:var(--grad);}
+  .nav-links{display:flex; gap:32px; align-items:center;}
+  .nav-links a{color:var(--muted); font-size:0.92rem; font-weight:500; transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:11px 22px; border-radius:10px;
+    font-weight:600; font-size:0.92rem;
+    border:none; cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--violet); outline-offset:2px;}
+  .btn-grad{background:var(--grad); color:#fff;}
+  .btn-grad:hover{transform:translateY(-1px); box-shadow:0 8px 24px rgba(139,92,246,0.35);}
+  .btn-ghost{background:transparent; border:1px solid var(--line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted-2);}
+
+  /* HERO */
+  .hero{padding:96px 0 64px; position:relative; overflow:hidden;}
+  .hero::before{
+    content:'';
+    position:absolute; top:-200px; right:-200px;
+    width:600px; height:600px; border-radius:50%;
+    background:radial-gradient(circle, rgba(139,92,246,0.18), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; position:relative;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--pink); font-size:0.82rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.06em;
+    margin-bottom:20px;
+  }
+  .hero h1{font-size:3.2rem; font-weight:700; line-height:1.08; margin-bottom:20px;}
+  .hero h1 .grad-text{
+    background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p{color:var(--muted); font-size:1.08rem; max-width:480px; margin-bottom:32px;}
+  .hero-actions{display:flex; gap:14px;}
+
+  /* live counter card */
+  .counter-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:32px; position:relative;
+  }
+  .counter-head{display:flex; align-items:center; justify-content:between; gap:12px; margin-bottom:24px;}
+  .counter-platform{display:flex; align-items:center; gap:10px; color:var(--muted); font-size:0.88rem; font-weight:600;}
+  .live-dot{width:8px; height:8px; border-radius:50%; background:#22C55E; box-shadow:0 0 0 0 rgba(34,197,94,0.5); animation:pulse 1.8s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(34,197,94,0.45);}
+    70%{box-shadow:0 0 0 8px rgba(34,197,94,0);}
+    100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
+  }
+  .counter-number{font-family:'Space Grotesk'; font-size:3rem; font-weight:700; margin-bottom:6px;}
+  .counter-label{color:var(--muted-2); font-size:0.88rem; margin-bottom:28px;}
+  .counter-bar-track{height:6px; background:var(--bg-soft); border-radius:99px; overflow:hidden; margin-bottom:8px;}
+  .counter-bar-fill{height:100%; width:0%; background:var(--grad); border-radius:99px; transition:width 1s ease;}
+  .counter-foot{display:flex; justify-content:space-between; color:var(--muted-2); font-size:0.78rem;}
+
+  /* SERVICES */
+  .section{padding:80px 0;}
+  .section-head{margin-bottom:48px; max-width:560px;}
+  .section-tag{color:var(--violet); font-size:0.82rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; display:block;}
+  .section-head h2{font-size:2.1rem; font-weight:700; margin-bottom:14px;}
+  .section-head p{color:var(--muted);}
+
+  .services-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .service-card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:28px; display:flex; flex-direction:column; gap:18px;
+    transition:border-color .2s, transform .2s;
+  }
+  .service-card:hover{border-color:rgba(139,92,246,0.4); transform:translateY(-3px);}
+  .platform-icon{
+    width:44px; height:44px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; background:var(--bg-soft);
+  }
+  .service-card h3{font-size:1.15rem; font-weight:600;}
+  .service-card .sub{color:var(--muted-2); font-size:0.86rem;}
+  .tiers{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--line); margin-top:auto; padding-top:14px;}
+  .tier-row{display:flex; justify-content:space-between; padding:7px 0; font-size:0.88rem;}
+  .tier-row .qty{color:var(--muted);}
+  .tier-row .price{font-weight:600; font-family:'Space Grotesk';}
+  .service-card .pick-btn{margin-top:10px; width:100%;}
+
+  /* HOW IT WORKS */
+  .steps{display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;}
+  .step{padding:24px 0; border-top:1px solid var(--line);}
+  .step .label{color:var(--muted-2); font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:14px;}
+  .step h3{font-size:1.05rem; font-weight:600; margin-bottom:8px;}
+  .step p{color:var(--muted); font-size:0.9rem;}
+
+  /* ORDER FORM */
+  .order-card{
+    background:var(--card); border:1px solid var(--line); border-radius:22px;
+    padding:44px; display:grid; grid-template-columns:1fr 1fr; gap:40px;
+  }
+  .order-card h2{font-size:1.7rem; margin-bottom:10px;}
+  .order-card .lead{color:var(--muted); font-size:0.95rem; margin-bottom:28px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:0.84rem; font-weight:600; color:var(--muted); margin-bottom:7px;}
+  .field select, .field input{
+    width:100%; padding:12px 14px; border-radius:10px;
+    background:var(--bg-soft); border:1px solid var(--line); color:var(--text);
+    font-size:0.94rem; font-family:'Inter';
+  }
+  .field select:focus, .field input:focus{outline:2px solid var(--violet); outline-offset:1px; border-color:transparent;}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .summary{
+    background:var(--bg-soft); border-radius:14px; padding:20px; margin-top:8px;
+  }
+  .summary-row{display:flex; justify-content:space-between; font-size:0.9rem; color:var(--muted); padding:5px 0;}
+  .summary-row.total{color:var(--text); font-weight:700; font-size:1.1rem; padding-top:12px; border-top:1px solid var(--line); margin-top:8px; font-family:'Space Grotesk';}
+  .payment-box{
+    background:var(--bg-soft); border-radius:14px; padding:20px; margin-top:24px;
+  }
+  .payment-box h4{font-size:0.92rem; margin-bottom:10px; font-weight:600;}
+  .payment-box p{color:var(--muted); font-size:0.86rem; margin-bottom:6px;}
+  .payment-box .num{font-family:'Space Grotesk'; font-weight:600; color:var(--text);}
+  .submit-btn{width:100%; padding:15px; font-size:1rem; margin-top:8px;}
+  .note{color:var(--muted-2); font-size:0.8rem; margin-top:14px; line-height:1.5;}
+
+  /* FOOTER / DISCLAIMER */
+  .disclaimer{
+    background:var(--bg-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    padding:28px 0;
+  }
+  .disclaimer p{color:var(--muted-2); font-size:0.82rem; line-height:1.6; max-width:780px;}
+  footer{padding:40px 0; color:var(--muted-2); font-size:0.85rem; display:flex; justify-content:space-between;}
+
+  @media (max-width: 880px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero h1{font-size:2.3rem;}
+    .services-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr 1fr;}
+    .order-card{grid-template-columns:1fr; padding:28px;}
+    footer{flex-direction:column; gap:10px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .live-dot{animation:none;}
+    .counter-bar-fill{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span class="logo-dot"></span>Boost</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#comment">Comment ça marche</a>
+      <a href="#commander">Commander</a>
+      <a href="#commander" class="btn btn-grad">Commander</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">● Livraison sous 24-72h</span>
+      <h1>Fais grandir tes <span class="grad-text">comptes</span>, pas juste tes chiffres.</h1>
+      <p>Followers, likes et vues sur Instagram, TikTok, YouTube et Facebook. Commande en quelques clics, paiement local (Wave / Orange Money), suivi simple.</p>
+      <div class="hero-actions">
+        <a href="#commander" class="btn btn-grad">Voir les tarifs</a>
+        <a href="#comment" class="btn btn-ghost">Comment ça marche</a>
+      </div>
+    </div>
+    <div class="counter-card">
+      <div class="counter-head">
+        <span class="counter-platform"><span class="live-dot"></span> Instagram · @demo_compte</span>
+      </div>
+      <div class="counter-number" id="counterNumber">12 480</div>
+      <div class="counter-label">Followers — commande en cours</div>
+      <div class="counter-bar-track"><div class="counter-bar-fill" id="counterBar"></div></div>
+      <div class="counter-foot"><span>1 000 commandés</span><span id="counterPct">0%</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer">
+  <div class="wrap">
+    <p>⚠️ À savoir avant de commander : l'achat de followers, likes ou vues va à l'encontre des conditions d'utilisation d'Instagram, TikTok, YouTube et Facebook. Cela peut entraîner une baisse de portée, un shadowban ou la suspension du compte. Aucun fournisseur ne peut garantir une rétention à 100% sur la durée. Commande à tes propres risques.</p>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Catalogue</span>
+      <h2>Choisis ta plateforme</h2>
+      <p>Tarifs de départ. Les paliers plus élevés sont calculés automatiquement dans le formulaire de commande.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card" data-service="ig-followers" data-cle-service="Instagram_Followers">
+        <div class="platform-icon">📷</div>
+        <div>
+          <h3>Instagram — Followers</h3>
+          <p class="sub">Profils variés, livraison progressive</p>
+        </div>
+        <div class="tiers">
+          <div class="tier-row" data-qty="100"><span class="qty">100</span><span class="price">1 500 F</span></div>
+          <div class="tier-row" data-qty="500"><span class="qty">500</span><span class="price">6 000 F</span></div>
+          <div class="tier-row" data-qty="1000"><span class="qty">1 000</span><span class="price">10 000 F</span></div>
+        </div>
+        <a href="#commander" class="btn btn-ghost pick-btn">Sélectionner</a>
+      </div>
+
+      <div class="service-card" data-service="ig-likes" data-cle-service="Instagram_Likes">
+        <div class="platform-icon">❤️</div>
+        <div>
+          <h3>Instagram — Likes</h3>
+          <p class="sub">Sur publication ou reel au choix</p>
+        </div>
+        <div class="tiers">
+          <div class="tier-row" data-qty="100"><span class="qty">100</span><span class="price">800 F</span></div>
+          <div class="tier-row" data-qty="500"><span class="qty">500</span><span class="price">3 200 F</span></div>
+          <div class="tier-row" data-qty="1000"><span class="qty">1 000</span><span class="price">5 500 F</span></div>
+        </div>
+        <a href="#commander" class="btn btn-ghost pick-btn">Sélectionner</a>
+      </div>
+
+      <div class="service-card" data-service="tiktok-followers" data-cle-service="TikTok_Followers">
+        <div class="platform-icon">🎵</div>
+        <div>
+          <h3>TikTok — Followers</h3>
+          <p class="sub">Livraison sous 48h en moyenne</p>
+        </div>
+        <div class="tiers">
+          <div class="tier-row" data-qty="100"><span class="qty">100</span><span class="price">1 800 F</span></div>
+          <div class="tier-row" data-qty="500"><span class="qty">500</span><span class="price">7 000 F</span></div>
+          <div class="tier-row" data-qty="1000"><span class="qty">1 000</span><span class="price">12 000 F</span></div>
+        </div>
+        <a href="#commander" class="btn btn-ghost pick-btn">Sélectionner</a>
+      </div>
+
+      <div class="service-card" data-service="tiktok-likes" data-cle-service="TikTok_Likes">
+        <div class="platform-icon">👍</div>
+        <div>
+          <h3>TikTok — Likes</h3>
+          <p class="sub">Idéal pour booster une vidéo précise</p>
+        </div>
+        <div class="tiers">
+          <div class="tier-row" data-qty="100"><span class="qty">100</span><span class="price">700 F</span></div>
+          <div class="tier-row" data-qty="500"><span class="qty">500</span><span class="price">2 900 F</span></div>
+          <div class="tier-row" data-qty="1000"><span class="qty">1 000</span><span class="price">5 000 F</span></div>
+        </div>
+        <a href="#commander" class="btn btn-ghost pick-btn">Sélectionner</a>
+      </div>
+
+      <div class="service-card" data-service="tiktok-views" data-cle-service="TikTok_Vues">
+        <div class="platform-icon">▶️</div>
+        <div>
+          <h3>TikTok — Vues</h3>
+          <p class="sub">Démarrage rapide, gros volume</p>
+        </div>
+        <div class="tiers">
+          <div class="tier-row" data-qty="1000"><span class="qty">1 000</span><span class="price">600 F</span></div>
+          <div class="tier-row" data-qty="5000"><span class="qty">5 000</span><span class="price">2 500 F</span></div>
+          <div class="tier-row" data-qty="10000"><span class="qty">10 000</span><span class="price">4 500 F</span></div>
+        </div>
+        <a href="#commander" class="btn btn-ghost pick-btn">Sélectionner</a>
+      </div>
+
+      <div class="service-card" data-service="yt-views" data-cle-service="YouTube_Vues">
+        <div class="platform-icon">📺</div>
+        <div>
+          <h3>YouTube — Vues</h3>
+          <p class="sub">Livraison progressive recommandée</p>
+        </div>
+        <div class="tiers">
+          <div class="tier-row" data-qty="500"><span class="qty">500</span><span class="price">3 500 F</span></div>
+          <div class="tier-row" data-qty="1000"><span class="qty">1 000</span><span class="price">6 500 F</span></div>
+          <div class="tier-row" data-qty="5000"><span class="qty">5 000</span><span class="price">28 000 F</span></div>
+        </div>
+        <a href="#commander" class="btn btn-ghost pick-btn">Sélectionner</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="comment" style="background:var(--bg-soft);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Process</span>
+      <h2>Comment ça marche</h2>
+      <p>Quatre étapes, pas d'automatisation compliquée — on traite chaque commande manuellement pour l'instant.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="label">Étape 1</div>
+        <h3>Choisis ton service</h3>
+        <p>Plateforme, type (followers / likes / vues) et quantité.</p>
+      </div>
+      <div class="step">
+        <div class="label">Étape 2</div>
+        <h3>Renseigne ton lien</h3>
+        <p>Username ou lien de la publication à booster.</p>
+      </div>
+      <div class="step">
+        <div class="label">Étape 3</div>
+        <h3>Paye via Wave / OM</h3>
+        <p>Tu envoies le paiement et nous confirmes la référence.</p>
+      </div>
+      <div class="step">
+        <div class="label">Étape 4</div>
+        <h3>Livraison</h3>
+        <p>Sous 24 à 72h selon le service et la quantité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="commander">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Commande</span>
+      <h2>Passer une commande</h2>
+      <p>Remplis le formulaire, on te contacte pour confirmer avant traitement.</p>
+    </div>
+
+    <div class="order-card">
+      <div>
+        <h2>Détails de la commande</h2>
+        <p class="lead">Aucun paiement automatique : tu règles manuellement, puis on valide.</p>
+
+        <form id="orderForm">
+          <div class="field">
+            <label for="platform">Plateforme</label>
+            <select id="platform">
+              <option value="instagram">Instagram</option>
+              <option value="tiktok">TikTok</option>
+              <option value="youtube">YouTube</option>
+              <option value="facebook">Facebook</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="serviceType">Type</label>
+              <select id="serviceType">
+                <option value="followers">Followers</option>
+                <option value="likes">Likes</option>
+                <option value="views">Vues</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="quantity">Quantité</label>
+              <select id="quantity">
+                <option value="100">100</option>
+                <option value="500" selected>500</option>
+                <option value="1000">1 000</option>
+                <option value="5000">5 000</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="link">Lien ou nom d'utilisateur</label>
+            <input type="text" id="link" placeholder="@moncompte ou https://...">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Ton nom</label>
+              <input type="text" id="name" placeholder="Nom complet">
+            </div>
+            <div class="field">
+              <label for="contact">WhatsApp / Email</label>
+              <input type="text" id="contact" placeholder="+221 ... ou email">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="summary">
+          <div class="summary-row"><span>Service</span><span id="sumService">Instagram — Followers</span></div>
+          <div class="summary-row"><span>Quantité</span><span id="sumQty">500</span></div>
+          <div class="summary-row total"><span>Total estimé</span><span id="sumTotal">6 000 F</span></div>
+        </div>
+
+        <div class="payment-box">
+          <h4>Coordonnées de paiement</h4>
+          <p>Wave : <span class="num">+221 77 000 00 00</span></p>
+          <p>Orange Money : <span class="num">+221 78 000 00 00</span></p>
+          <p>Après paiement, envoie la capture par WhatsApp avec ton nom pour validation.</p>
+        </div>
+
+        <button type="button" class="btn btn-grad submit-btn" id="submitOrder">Envoyer ma commande</button>
+        <p class="note">En commandant, tu confirmes être informé que ce type de service va à l'encontre des CGU des plateformes concernées et que la livraison n'est pas garantie à 100% sur la durée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Boost. Service indépendant, non affilié à Meta, TikTok ou YouTube.</span>
+    <span>Contact : contact@boost-demo.sn</span>
+  </div>
+</footer>
+
+<script>
+  // Remplace cette URL par celle obtenue après déploiement de ton Apps Script (voir README)
+  const SCRIPT_URL = 'COLLE_ICI_TON_URL_APPS_SCRIPT';
+
+  // Doit être EXACTEMENT identique à JETON_SECRET dans AppsScript.gs.
+  // Rappel : ce jeton est visible par quiconque consulte le code source du
+  // site (clic droit > Voir le code source). Il bloque le spam aléatoire,
+  // pas une personne qui lirait ce fichier. Voir README pour les limites.
+  const JETON_SECRET = 'change-moi-en-une-longue-chaine-aleatoire-unique';
+
+  // Prix de secours (en F CFA, pour 1000 unités) — utilisés UNIQUEMENT si
+  // l'appel au panel échoue ou si SCRIPT_URL n'est pas encore configuré.
+  // Une fois le panel branché, les vrais prix prennent le dessus automatiquement.
+  const pricingSecours = {
+    Instagram_Followers: 10000, Instagram_Likes: 5500, Instagram_Vues: 3500,
+    TikTok_Followers: 12000, TikTok_Likes: 5000, TikTok_Vues: 600,
+    YouTube_Vues: 6500, YouTube_Likes: 9000, YouTube_Followers: 18000,
+    Facebook_Followers: 9500, Facebook_Likes: 5200, Facebook_Vues: 3200
+  };
+
+  // Tarifs effectifs en mémoire : remplacés par les vrais tarifs du panel
+  // une fois récupérés, sinon on garde les prix de secours.
+  let tarifsActuels = { ...pricingSecours };
+  let tarifsSontEnDirect = false;
+
+  const platformSel = document.getElementById('platform');
+  const typeSel = document.getElementById('serviceType');
+  const qtySel = document.getElementById('quantity');
+  const sumService = document.getElementById('sumService');
+  const sumQty = document.getElementById('sumQty');
+  const sumTotal = document.getElementById('sumTotal');
+
+  const platformLabels = {instagram:'Instagram', tiktok:'TikTok', youtube:'YouTube', facebook:'Facebook'};
+  const typeLabels = {followers:'Followers', likes:'Likes', views:'Vues'};
+
+  function fmt(n){ return Math.round(n).toLocaleString('fr-FR') + ' F'; }
+
+  function updateSummary(){
+    const p = platformSel.value, t = typeSel.value, q = parseInt(qtySel.value, 10);
+    const cleService = platformLabels[p] + '_' + typeLabels[t];
+    const prixPour1000 = tarifsActuels[cleService];
+    const price = prixPour1000 ? (prixPour1000 * q / 1000) : null;
+    sumService.textContent = platformLabels[p] + ' — ' + typeLabels[t];
+    sumQty.textContent = q.toLocaleString('fr-FR');
+    sumTotal.textContent = price ? fmt(price) : 'Sur devis';
+  }
+
+  // Va chercher les tarifs réels (prix de gros panel + marge) auprès d'Apps Script.
+  // Si ça échoue (panel pas encore configuré, hors-ligne...), on garde les prix
+  // de secours déjà chargés, donc le site reste fonctionnel dans tous les cas.
+  // Met à jour les prix affichés dans les cartes du catalogue (en haut de page)
+  // à partir des tarifs en direct, en respectant la quantité de référence
+  // du panel (UNITE_PRIX_PANEL côté script = 1000 par défaut).
+  function mettreAJourCartesCatalogue(){
+    document.querySelectorAll('.service-card').forEach(card => {
+      const cle = card.dataset.cleService;
+      if(!cle || !tarifsActuels[cle]) return;
+      const prixPour1000 = tarifsActuels[cle];
+      card.querySelectorAll('.tier-row').forEach(row => {
+        const qty = parseInt(row.dataset.qty, 10);
+        if(!qty) return;
+        const prix = prixPour1000 * qty / 1000;
+        row.querySelector('.price').textContent = fmt(prix);
+      });
+    });
+  }
+
+  function chargerTarifsEnDirect(){
+    if(SCRIPT_URL.includes('COLLE_ICI')) return;
+
+    fetch(SCRIPT_URL + '?action=tarifs&jeton=' + encodeURIComponent(JETON_SECRET))
+      .then(r => r.json())
+      .then(data => {
+        if(data.status === 'ok' && data.tarifs && Object.keys(data.tarifs).length > 0){
+          const nouveaux = {};
+          for(const cle in data.tarifs){
+            nouveaux[cle] = data.tarifs[cle].prixVentePour1000;
+          }
+          tarifsActuels = { ...pricingSecours, ...nouveaux };
+          tarifsSontEnDirect = true;
+          updateSummary();
+          mettreAJourCartesCatalogue();
+        }
+      })
+      .catch(() => {
+        // Silencieux : on reste sur les prix de secours, pas besoin d'inquiéter le client.
+      });
+  }
+
+  [platformSel, typeSel, qtySel].forEach(el => el.addEventListener('change', updateSummary));
+  updateSummary();
+  chargerTarifsEnDirect();
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.querySelector('.pick-btn').addEventListener('click', (e) => {
+      const service = card.dataset.service;
+      const map = {
+        'ig-followers':['instagram','followers'], 'ig-likes':['instagram','likes'],
+        'tiktok-followers':['tiktok','followers'], 'tiktok-likes':['tiktok','likes'], 'tiktok-views':['tiktok','views'],
+        'yt-views':['youtube','views']
+      };
+      if(map[service]){
+        platformSel.value = map[service][0];
+        typeSel.value = map[service][1];
+        updateSummary();
+      }
+    });
+  });
+
+  const submitBtn = document.getElementById('submitOrder');
+
+  submitBtn.addEventListener('click', () => {
+    const link = document.getElementById('link').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+
+    if(!link || !name || !contact){
+      alert('Merci de renseigner le lien, ton nom et un moyen de contact avant d\'envoyer la commande.');
+      return;
+    }
+
+    if(SCRIPT_URL.includes('COLLE_ICI')){
+      alert('Configuration manquante : ajoute ton URL Apps Script dans le code (variable SCRIPT_URL) pour activer la réception des commandes. Voir README.md.');
+      return;
+    }
+
+    const payload = {
+      jeton: JETON_SECRET,
+      date: new Date().toLocaleString('fr-FR'),
+      plateforme: platformLabels[platformSel.value],
+      type: typeLabels[typeSel.value],
+      quantite: qtySel.value,
+      lien: link,
+      nom: name,
+      contact: contact,
+      total: sumTotal.textContent
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours...';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain'},
+      body: JSON.stringify(payload)
+    })
+    .then(() => {
+      submitBtn.textContent = 'Commande envoyée ✓';
+      alert('Commande envoyée ! Nous te contactons sur ' + contact + ' pour confirmer le paiement.');
+      document.getElementById('orderForm').reset();
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Envoyer ma commande';
+      }, 2000);
+    })
+    .catch(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer ma commande';
+      alert('Erreur lors de l\'envoi. Vérifie ta connexion et réessaie, ou contacte-nous directement.');
+    });
+  });
+
+  // Animation du compteur hero (décoratif, illustratif)
+  let current = 12480;
+  const target = current + 1000;
+  const counterNumber = document.getElementById('counterNumber');
+  const counterBar = document.getElementById('counterBar');
+  const counterPct = document.getElementById('counterPct');
+  let progress = 0;
+
+  function animateCounter(){
+    progress += 1;
+    if(progress > 100){ progress = 0; current = 12480; }
+    current += Math.floor(Math.random()*4);
+    counterNumber.textContent = current.toLocaleString('fr-FR');
+    counterBar.style.width = progress + '%';
+    counterPct.textContent = progress + '%';
+  }
+  setInterval(animateCounter, 900);
+</script>
+
+</body>
+</html>
